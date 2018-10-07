@@ -13,7 +13,7 @@ import javax.crypto.spec.SecretKeySpec;
  * <p>
  * {AES128 算法，加密模式为ECB，填充模式为 pkcs7（实际就是pkcs5）}
  */
-public class AESUtils8 {
+public class AESUtils {
     /**
      * 加密
      *
