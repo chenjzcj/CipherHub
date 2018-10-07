@@ -1,4 +1,6 @@
-package com.tokok.tok.api.safe.encrypt;
+package com.tok.aesdemo.aes;
+
+import android.util.Log;
 
 import java.security.SecureRandom;
 
@@ -83,6 +85,25 @@ public class AESCrypt {
  
     private void appendHex(StringBuffer sb, byte b) {
         sb.append(HEX.charAt((b >> 4) & 0x0f)).append(HEX.charAt(b & 0x0f));
+    }
+
+
+
+    public static final String PUBLIC_KEY_STR = "MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAILho76AqLkeilrjmOUCKhXQAe9Ul4QzfiS/y0HXmdx64mPtvukXi++dJGTWuIMxwlXR4+0ynb1yPRX+hV10yAkCAwEAAQ==";
+    public static void main(String[] args) {
+        AESCrypt aesCrypt = new AESCrypt();
+        String content = PUBLIC_KEY_STR;
+        String password = "da09a9528b9c710addd8439684e09608";
+        try {
+            //Log.i("dddddddddddddddd", "加密文本为" + content);
+            String encryptingCode = aesCrypt.encrypt(password, content);
+            Log.i("dddddddddddddddd", "加密结果为 " + encryptingCode);
+            String decryptingCode = aesCrypt.decrypt(password, encryptingCode);
+            Log.i("dddddddddddddddd", "解密结果为 " + decryptingCode);
+        } catch (Exception e) {
+            Log.i("dddddddddddddddd", "e " + e);
+            e.printStackTrace();
+        }
     }
 
 }
