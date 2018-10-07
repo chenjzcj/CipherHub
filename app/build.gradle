@@ -27,7 +27,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     //常用工具套装 https://github.com/chenjzcj/AndroidUtilCode
     implementation 'com.blankj:utilcode:1.17.3'
-    //AES对称加密封装 https://github.com/scottyab/AESCrypt-Android
+    //AES对称加密封装 https://github.com/scottyab/AESCrypt-Android(已经验证报错：Cannot find any provider supporting AES/CBC/PKCS7Padding)
     implementation 'com.scottyab:aescrypt:0.0.1'
     //AES对称加密封装最终解决方案 https://github.com/tozny/java-aes-crypto
     implementation 'com.github.tozny:java-aes-crypto:1.1.0'
