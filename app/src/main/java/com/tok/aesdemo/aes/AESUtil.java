@@ -1,5 +1,6 @@
 package com.tok.aesdemo.aes;
 
+
 import android.text.TextUtils;
 
 import com.blankj.utilcode.util.LogUtils;
@@ -16,6 +17,7 @@ import javax.crypto.spec.SecretKeySpec;
  * AES加密解密工具类
  *
  * @author M-Y
+ * 验证不可用，报错java.lang.ExceptionInInitializerError
  */
 public class AESUtil {
     private static final String defaultCharset = "UTF-8";
@@ -85,7 +87,7 @@ public class AESUtil {
                 //将二进制转换成16进制
                 return parseByte2HexStr(result);
             } else {
-                LogUtils.i("result = "+ Arrays.toString(result));
+                LogUtils.i("result = " + Arrays.toString(result));
                 return new String(result, defaultCharset);
             }
         } catch (Exception e) {
@@ -131,7 +133,7 @@ public class AESUtil {
         return result;
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         String content = "{'repairPhone':'18547854787','customPhone':'12365478965','captchav':'58m7'}";
         System.out.println("加密前：" + content);
         System.out.println("加密密钥和解密密钥：" + KEY);

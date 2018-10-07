@@ -1,6 +1,5 @@
-package com.tokok.tok.api.safe.encrypt;
+package com.tok.aesdemo.aes;
 
-import android.util.Log;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -8,6 +7,7 @@ import java.io.IOException;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Random;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -26,8 +26,10 @@ import javax.crypto.spec.SecretKeySpec;
  * <p>
  * 总结：
  * AES对称加密，加解密相比于亦或加密还是有点复杂的，安全性也比亦或加密高，AES加密不是绝对的安全。
+ * <p>
+ * 功能说明：对文件进行AES加密（验证可用）
  */
-public class AES {
+public class AESForFile {
     private static final String TAG = "AES";
     /**
      * 加密
@@ -64,7 +66,8 @@ public class AES {
     }
 
     private static void encryptByAES(int mode, String source, String dest) {
-        Log.i(TAG, "start===encryptByAES");
+        //Log.i(TAG, "start===encryptByAES");
+        System.out.print("start===encryptByAES");
         FileInputStream fis = null;
         FileOutputStream fos = null;
         try {
@@ -79,10 +82,12 @@ public class AES {
                     fos.write(buffResult);
                 }
             }
-            Log.i(TAG, "end===encryptByAES");
+            //Log.i(TAG, "end===encryptByAES");
+            System.out.print("end===encryptByAES");
         } catch (IOException e) {
             e.printStackTrace();
-            Log.e(TAG, "encryptByAES failed err: " + e.getMessage());
+            //Log.e(TAG, "encryptByAES failed err: " + e.getMessage());
+            System.out.print("encryptByAES failed err: " + e.getMessage());
         } finally {
             try {
                 if (fis != null) {
@@ -111,11 +116,18 @@ public class AES {
                 InvalidKeyException | IllegalBlockSizeException |
                 BadPaddingException | InvalidAlgorithmParameterException e) {
             e.printStackTrace();
-            Log.e(TAG, "encryption failed... err: " + e.getMessage());
+            //Log.e(TAG, "encryption failed... err: " + e.getMessage());
+            System.out.print("encryption failed... err: " + e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
-            Log.e(TAG, "encryption1 failed ...err: " + e.getMessage());
+            //Log.e(TAG, "encryption1 failed ...err: " + e.getMessage());
+            System.out.print("encryption1 failed ...err: " + e.getMessage());
         }
         return null;
+    }
+
+    public static void main(String[] args) {
+        //encryptByAES("i://source.txt", "i://dest.txt");
+        decryptByAES("i://dest.txt", "i://pla.txt");
     }
 }
