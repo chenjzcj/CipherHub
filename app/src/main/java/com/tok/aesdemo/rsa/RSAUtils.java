@@ -1,4 +1,4 @@
-package com.tokok.tok.api.safe.encrypt;
+package com.tok.aesdemo.rsa;
 
 import android.util.Base64;
 

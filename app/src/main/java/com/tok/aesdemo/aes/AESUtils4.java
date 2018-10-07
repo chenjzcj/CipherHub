@@ -1,4 +1,4 @@
-package com.tok.aesdemo;
+package com.tok.aesdemo.aes;
 
 import android.text.TextUtils;
 import android.util.Base64;
@@ -11,7 +11,7 @@ import javax.crypto.spec.SecretKeySpec;
 /**
  * Created by Felix.Zhong on 2018/9/30 15:51
  */
-public class AESUtils2 {
+public class AESUtils4 {
     private static final String TAG = "AESUtils";
 
     // CBC(Cipher Block Chaining, 加密快链)模式，PKCS7Padding补码方式

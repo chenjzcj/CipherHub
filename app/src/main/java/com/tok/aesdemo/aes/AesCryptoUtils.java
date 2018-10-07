@@ -1,4 +1,4 @@
-package com.tok.aesdemo;
+package com.tok.aesdemo.aes;
 
 import com.tozny.crypto.android.AesCbcWithIntegrity;
 
