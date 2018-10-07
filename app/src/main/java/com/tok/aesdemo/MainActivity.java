@@ -6,11 +6,11 @@ import android.util.Log;
 import android.view.View;
 
 import com.tok.aesdemo.aes.AESCrypt;
+import com.tok.aesdemo.aes.AESUtils;
 import com.tozny.crypto.android.AesCbcWithIntegrity;
 
 public class MainActivity extends Activity {
 
-    private AESCrypt mAESCrypt;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -21,25 +21,14 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 //aes();
-                aes2();
+                aes1();
+                //aes2();
                 //aes3();
             }
         });
 
-        mAESCrypt = new AESCrypt();
-        String masterPassword = "ae2d";
-        String originalText = "012测试abc";
-        try {
-            Log.i("dddddddddddddddd", "加密文本为" + originalText);
-            String encryptingCode = mAESCrypt.encrypt(masterPassword, originalText);
-            Log.i("dddddddddddddddd", "加密结果为 " + encryptingCode);
-            String decryptingCode = mAESCrypt.decrypt(masterPassword, encryptingCode);
-            Log.i("dddddddddddddddd", "解密结果为 " + decryptingCode);
-        } catch (Exception e) {
-            Log.i("dddddddddddddddd", "e " + e);
-            e.printStackTrace();
-        }
     }
+
 
     private void aes() {
         final String PUBLIC_KEY_STR = "MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAILho76AqLkeilrjmOUCKhXQAe9Ul4QzfiS/y0HXmdx64mPtvukXi++dJGTWuIMxwlXR4+0ynb1yPRX+hV10yAkCAwEAAQ==";
@@ -66,9 +55,29 @@ public class MainActivity extends Activity {
 
     }
 
-    private void aes3(){
-        Log.i("aaaaaaaa", (SecurityEncode.decode("25d55ad283aa400af464c76d713c07ad","B79F130FE34EF3248D0E464DF9EA046B3B22533C7913F27A549CC198A150B319FCCED209E332E195E6D1A84B8D21D7967D0CED5F844CD49ED3D06F90B4ED29734AFAC5C641B8B27A7F8C2482BD5593F9525F63683B8DE611BA2E69F45F17295138B89AF610184A2F695029402BC44AD3C7E43A861775E972DE846F7989867215EFE8316357B61C0B")));
-        Log.i("aaaaaaaa", (SecurityEncode.decode("7d54d628bccd60b29191fa0f7abeeeef","7AAB0639D94069B04110B1CEABAA7AD1AC4985CF5D335B9A206DACEBF537542A357A3DBF3BF1399F9E20C76F4E49C829FDDF5B1F7714CA72BA4B233EB87B6B6F456497D2DF229CC0092180F3D14D51F228ECE606680229F711879901E2FD24B78345BCB10B64FCD8E427D8A1D03BEB41081EACEDD8E45D84F521E3745D7620DD5A667CA7047B04AB10DDFE838DD5A35E")));
+    private void aes1() {
+        String content = "MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAILho76AqLkeilrjmOUCKhXQAe9Ul4QzfiS/y0HXmdx64mPtvukXi++dJGTWuIMxwlXR4+0ynb1yPRX+hV10yAkCAwEAAQ==";
+        String password = "da09a9528b9c710addd8439684e09608";
+
+        //加密
+        System.out.println("加密前：" + content);
+        byte[] encryptResult = AESUtils.encrypt(content, password);
+        String encryptResultStr = AESUtils.parseByte2HexStr(encryptResult);
+        System.out.println("加密后：" + encryptResultStr);
+
+        //解密
+        byte[] decryptFrom = AESUtils.parseHexStr2Byte(encryptResultStr);
+        byte[] decryptResult = AESUtils.decrypt(decryptFrom, password);
+        System.out.println("解密后：" + new String(decryptResult));
+
+        password = "25d55ad283aa400af464c76d713c07ad";
+
+        //加密
+        String encrypt = AESUtils.encryptString(content, password);
+        System.out.println("加密后：" + encrypt);
+        //解密
+        String decrypt = AESUtils.decryptString(encrypt, password);
+        System.out.println("解密后：" + decrypt);
     }
 
     public static void aes2() {
@@ -99,7 +108,7 @@ public class MainActivity extends Activity {
 
         AesCbcWithIntegrity.SecretKeys keys;
         try {
-            keys = AesCbcWithIntegrity.generateKeyFromPassword(password,"eee");
+            keys = AesCbcWithIntegrity.generateKeyFromPassword(password, "eee");
             /*Log.i("aaaaaaaa", "加密前：" + content);
             AesCbcWithIntegrity.CipherTextIvMac cipherTextIvMac = AesCbcWithIntegrity.encrypt(content, keys);
             //store or send to server
@@ -114,8 +123,25 @@ public class MainActivity extends Activity {
         }
 
     }
-    public static void main(String[] args) {
-        aes2();
+
+    private void aes3() {
+        Log.i("aaaaaaaa", (SecurityEncode.decode("25d55ad283aa400af464c76d713c07ad", "B79F130FE34EF3248D0E464DF9EA046B3B22533C7913F27A549CC198A150B319FCCED209E332E195E6D1A84B8D21D7967D0CED5F844CD49ED3D06F90B4ED29734AFAC5C641B8B27A7F8C2482BD5593F9525F63683B8DE611BA2E69F45F17295138B89AF610184A2F695029402BC44AD3C7E43A861775E972DE846F7989867215EFE8316357B61C0B")));
+        Log.i("aaaaaaaa", (SecurityEncode.decode("7d54d628bccd60b29191fa0f7abeeeef", "7AAB0639D94069B04110B1CEABAA7AD1AC4985CF5D335B9A206DACEBF537542A357A3DBF3BF1399F9E20C76F4E49C829FDDF5B1F7714CA72BA4B233EB87B6B6F456497D2DF229CC0092180F3D14D51F228ECE606680229F711879901E2FD24B78345BCB10B64FCD8E427D8A1D03BEB41081EACEDD8E45D84F521E3745D7620DD5A667CA7047B04AB10DDFE838DD5A35E")));
     }
 
+    private void aes4() {
+        AESCrypt mAESCrypt = new AESCrypt();
+        String masterPassword = "ae2d";
+        String originalText = "012测试abc";
+        try {
+            Log.i("dddddddddddddddd", "加密文本为" + originalText);
+            String encryptingCode = mAESCrypt.encrypt(masterPassword, originalText);
+            Log.i("dddddddddddddddd", "加密结果为 " + encryptingCode);
+            String decryptingCode = mAESCrypt.decrypt(masterPassword, encryptingCode);
+            Log.i("dddddddddddddddd", "解密结果为 " + decryptingCode);
+        } catch (Exception e) {
+            Log.i("dddddddddddddddd", "e " + e);
+            e.printStackTrace();
+        }
+    }
 }

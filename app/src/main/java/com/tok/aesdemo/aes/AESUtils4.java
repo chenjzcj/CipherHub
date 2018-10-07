@@ -111,10 +111,9 @@ public class AESUtils4 {
 
 
 
-    public static final String PUBLIC_KEY_STR = "MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAILho76AqLkeilrjmOUCKhXQAe9Ul4QzfiS/y0HXmdx64mPtvukXi++dJGTWuIMxwlXR4+0ynb1yPRX+hV10yAkCAwEAAQ==";
 
     public static void main(String[] args) {
-        String content = PUBLIC_KEY_STR;
+        String content = "MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAILho76AqLkeilrjmOUCKhXQAe9Ul4QzfiS/y0HXmdx64mPtvukXi++dJGTWuIMxwlXR4+0ynb1yPRX+hV10yAkCAwEAAQ==";
         String password = "da09a9528b9c710addd8439684e09608";
         //加密
         System.out.println("加密前：" + content);

@@ -9,7 +9,7 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
 /**
- * 在java环境可以正常加解密，但是到了安卓环境，加解密有问题
+ * 在java环境可以正常加解密，但是到了安卓环境，加解密有问题(每次加密的字符串不一样)
  * <p>
  * {AES128 算法，加密模式为ECB，填充模式为 pkcs7（实际就是pkcs5）}
  */
@@ -118,7 +118,7 @@ public class AESUtils {
      * @param buf 需要转成16进制字符串的字节数组
      * @return 转换成16进制后的字符串
      */
-    private static String parseByte2HexStr(byte[] buf) {
+    public static String parseByte2HexStr(byte[] buf) {
         StringBuilder sb = new StringBuilder();
         for (byte b : buf) {
             String hex = Integer.toHexString(b & 0xFF);
@@ -136,7 +136,7 @@ public class AESUtils {
      * @param hexStr 16进制字符串
      * @return 转换后的字节数组
      */
-    private static byte[] parseHexStr2Byte(String hexStr) {
+    public static byte[] parseHexStr2Byte(String hexStr) {
         int length = hexStr.length();
         if (length < 1) {
             return null;
@@ -174,5 +174,4 @@ public class AESUtils {
         String decrypt = decryptString(encrypt, password);
         System.out.println("解密后：" + decrypt);
     }
-
 }
