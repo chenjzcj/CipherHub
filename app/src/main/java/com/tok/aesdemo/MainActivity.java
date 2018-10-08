@@ -5,9 +5,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.tok.aesdemo.aes.AESCrypt;
 import com.tok.aesdemo.aes.AESUtils;
-import com.tozny.crypto.android.AesCbcWithIntegrity;
+import com.tok.aesdemo.aes.AesCryptoUtils;
+import com.tok.aesdemo.aes.cryptogram;
+import com.tok.aesdemo.des.SecurityEncode;
 
 /**
  * @author Administrator
@@ -24,7 +27,8 @@ public class MainActivity extends Activity {
         findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                aes1();
+                aes3();
+                //aesCrypto();
             }
         });
     }
@@ -73,46 +77,20 @@ public class MainActivity extends Activity {
         System.out.println("解密后：" + decrypt);
     }
 
-    public static void aes2() {
-        /*String password = "password";
-        String message = "hello world";
-        AESCrypt aesCrypt = new AESCrypt();
-        Log.i("aaaaaaaa", "加密前：" + message);
-        String encryptedMsg = null;
-        try {
-            encryptedMsg = aesCrypt.encrypt(password, message);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        Log.i("aaaaaaaa", "加密后：" + encryptedMsg);
-        //String encryptedMsg = "2B22cS3UC5s35WBihLBo8w==";
+    /**
+     * https://github.com/tozny/java-aes-crypto
+     * 第三方aes加解密测试
+     */
+    public void aesCrypto() {
+        LogUtils.i("加密前：" + content);
+        String ciphertextString = AesCryptoUtils.encrypt(content, password);
+        LogUtils.i("加密后：" + ciphertextString);
+        String plainText = AesCryptoUtils.decryptString(ciphertextString, password);
+        LogUtils.i("解密后：" + plainText);
 
-        try {
-            String messageAfterDecrypt = aesCrypt.decrypt(password, encryptedMsg);
-            Log.i("aaaaaaaa", "解密后：" + messageAfterDecrypt);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
 
-        String content = "CB8B8251860F0C1F14E670323207867BE6083729CB1E24FD58FD950912524B46E2FB4B4D5E1401ABB05A6606EB9BE0E6C6BE90B84FCA7DC777493F9F4E5B1FF24C77675D1F5981B65E5190A6C79D8CE6F4384398B572AF80AA9DF92B792B530DEB4EEAB50AE5DCCF77B0D18ED12BFEDBFE696542D72202B57A3E95ECBCFC6CA880034144DA074323947D1C489A76826E";
-        String password = "208139976011a2bb877a785004478376";
-
-        AesCbcWithIntegrity.SecretKeys keys;
-        try {
-            keys = AesCbcWithIntegrity.generateKeyFromPassword(password, "eee");
-            /*Log.i("aaaaaaaa", "加密前：" + content);
-            AesCbcWithIntegrity.CipherTextIvMac cipherTextIvMac = AesCbcWithIntegrity.encrypt(content, keys);
-            //store or send to server
-            String ciphertextString = cipherTextIvMac.toString();
-            Log.i("aaaaaaaa", "加密后：" + ciphertextString);*/
-            //Use the constructor to re-create the CipherTextIvMac class from the string:
-            AesCbcWithIntegrity.CipherTextIvMac cipherTextIvMac2 = new AesCbcWithIntegrity.CipherTextIvMac(content);
-            String plainText = AesCbcWithIntegrity.decryptString(cipherTextIvMac2, keys);
-            Log.i("aaaaaaaa", "解密后：" + plainText);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        String decryptString = AesCryptoUtils.decryptString("8C7DF8A49578485FA90EEE0E4EE9DB3519273DE9A0A8E8506B63244B96F374E37D836038B48F22F6E4C6E6C806489728311F4B9E710227B1D04F5F0B7A0FCB7E942E6BD470A5D34BE2FDA578878FBF4EAEA856397A752324C2EBB1747A40CCAE50D750E6ADD7800A11832A7AA6A27EDEC36E2B8B2044C53113756CC5669E29D3", "c390be83ea34611c2c933f056f010e63");
+        LogUtils.i("解密后：" + decryptString);
     }
 
     private void aes3() {
@@ -132,6 +110,28 @@ public class MainActivity extends Activity {
             Log.i("dddddddddddddddd", "解密结果为 " + decryptingCode);
         } catch (Exception e) {
             Log.i("dddddddddddddddd", "e " + e);
+            e.printStackTrace();
+        }
+    }
+
+    private void aes5() {
+        String password = "password";
+        String message = "hello world";
+        AESCrypt aesCrypt = new AESCrypt();
+        Log.i("aaaaaaaa", "加密前：" + message);
+        String encryptedMsg = null;
+        try {
+            encryptedMsg = aesCrypt.encrypt(password, message);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Log.i("aaaaaaaa", "加密后：" + encryptedMsg);
+        //String encryptedMsg = "2B22cS3UC5s35WBihLBo8w==";
+
+        try {
+            String messageAfterDecrypt = aesCrypt.decrypt(password, encryptedMsg);
+            Log.i("aaaaaaaa", "解密后：" + messageAfterDecrypt);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

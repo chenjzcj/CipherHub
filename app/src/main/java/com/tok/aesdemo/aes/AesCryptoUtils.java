@@ -28,6 +28,25 @@ public class AesCryptoUtils {
     }
 
     /**
+     * 加密
+     *
+     * @param plaintext 需要加密的原文
+     * @return 加密后的字符串
+     */
+    public static String encrypt(String plaintext, String password) {
+        String ciphertextString = "";
+        try {
+            AesCbcWithIntegrity.SecretKeys keys = AesCbcWithIntegrity.generateKeyFromPassword(password, "eee");
+            AesCbcWithIntegrity.CipherTextIvMac cipherTextIvMac = AesCbcWithIntegrity.encrypt(plaintext, keys);
+            //store or send to server
+            ciphertextString = cipherTextIvMac.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ciphertextString;
+    }
+
+    /**
      * 解密
      *
      * @param base64IvAndCiphertext base64处理过的密文

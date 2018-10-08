@@ -7,7 +7,7 @@ package com.tok.aesdemo.aes;
 
 
 import com.blankj.utilcode.util.LogUtils;
-import com.tok.aesdemo.decode.Base64;
+import com.tok.aesdemo.encode.Base64;
 
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;

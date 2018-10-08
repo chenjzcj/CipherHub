@@ -1,4 +1,4 @@
-package com.tok.aesdemo.decode;
+package com.tok.aesdemo.encode;
 
 /**
  * Created by Felix.Zhong on 2018/8/22 14:56

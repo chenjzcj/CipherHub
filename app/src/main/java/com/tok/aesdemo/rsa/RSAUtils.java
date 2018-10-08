@@ -13,12 +13,17 @@ import javax.crypto.Cipher;
 
 /**
  * Created by Felix.Zhong on 2018/8/22 14:30
+ * RSA非对称加密工具类
  */
 public class RSAUtils {
-    /* 构建Cipher实例时所传入的的字符串，默认为"RSA/NONE/PKCS1Padding" */
+    /**
+     * 构建Cipher实例时所传入的的字符串，默认为"RSA/NONE/PKCS1Padding"
+     */
     private static String sTransform = "RSA/NONE/PKCS1Padding";
 
-    /* 进行Base64转码时的flag设置，默认为Base64.DEFAULT */
+    /**
+     * 进行Base64转码时的flag设置，默认为Base64.DEFAULT
+     */
     private static int sBase64Mode = Base64.DEFAULT;
 
     //初始化方法，设置参数
