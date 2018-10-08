@@ -9,8 +9,12 @@ import com.tok.aesdemo.aes.AESCrypt;
 import com.tok.aesdemo.aes.AESUtils;
 import com.tozny.crypto.android.AesCbcWithIntegrity;
 
+/**
+ * @author Administrator
+ */
 public class MainActivity extends Activity {
-
+    String content = "MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAILho76AqLkeilrjmOUCKhXQAe9Ul4QzfiS/y0HXmdx64mPtvukXi++dJGTWuIMxwlXR4+0ynb1yPRX+hV10yAkCAwEAAQ==";
+    String password = "da09a9528b9c710addd8439684e09608";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -20,21 +24,13 @@ public class MainActivity extends Activity {
         findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //aes();
                 aes1();
-                //aes2();
-                //aes3();
             }
         });
-
     }
 
 
     private void aes() {
-        final String PUBLIC_KEY_STR = "MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAILho76AqLkeilrjmOUCKhXQAe9Ul4QzfiS/y0HXmdx64mPtvukXi++dJGTWuIMxwlXR4+0ynb1yPRX+hV10yAkCAwEAAQ==";
-
-        String content = PUBLIC_KEY_STR;
-        String password = "da09a9528b9c710addd8439684e09608";
         //加密
         System.out.println("加密前：" + content);
         String encryptResultStr = null;
@@ -56,9 +52,6 @@ public class MainActivity extends Activity {
     }
 
     private void aes1() {
-        String content = "MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAILho76AqLkeilrjmOUCKhXQAe9Ul4QzfiS/y0HXmdx64mPtvukXi++dJGTWuIMxwlXR4+0ynb1yPRX+hV10yAkCAwEAAQ==";
-        String password = "da09a9528b9c710addd8439684e09608";
-
         //加密
         System.out.println("加密前：" + content);
         byte[] encryptResult = AESUtils.encrypt(content, password);
@@ -68,7 +61,7 @@ public class MainActivity extends Activity {
         //解密
         byte[] decryptFrom = AESUtils.parseHexStr2Byte(encryptResultStr);
         byte[] decryptResult = AESUtils.decrypt(decryptFrom, password);
-        System.out.println("解密后：" + new String(decryptResult));
+        System.out.println("解密后：" + new String(decryptResult == null ? new byte[0] : decryptResult));
 
         password = "25d55ad283aa400af464c76d713c07ad";
 
@@ -101,9 +94,7 @@ public class MainActivity extends Activity {
             e.printStackTrace();
         }*/
 
-        final String PUBLIC_KEY_STR = "CB8B8251860F0C1F14E670323207867BE6083729CB1E24FD58FD950912524B46E2FB4B4D5E1401ABB05A6606EB9BE0E6C6BE90B84FCA7DC777493F9F4E5B1FF24C77675D1F5981B65E5190A6C79D8CE6F4384398B572AF80AA9DF92B792B530DEB4EEAB50AE5DCCF77B0D18ED12BFEDBFE696542D72202B57A3E95ECBCFC6CA880034144DA074323947D1C489A76826E";
-
-        String content = PUBLIC_KEY_STR;
+        String content = "CB8B8251860F0C1F14E670323207867BE6083729CB1E24FD58FD950912524B46E2FB4B4D5E1401ABB05A6606EB9BE0E6C6BE90B84FCA7DC777493F9F4E5B1FF24C77675D1F5981B65E5190A6C79D8CE6F4384398B572AF80AA9DF92B792B530DEB4EEAB50AE5DCCF77B0D18ED12BFEDBFE696542D72202B57A3E95ECBCFC6CA880034144DA074323947D1C489A76826E";
         String password = "208139976011a2bb877a785004478376";
 
         AesCbcWithIntegrity.SecretKeys keys;
