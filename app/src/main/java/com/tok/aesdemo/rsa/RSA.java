@@ -8,8 +8,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.security.Key;
 import java.security.KeyFactory;
-import java.security.KeyPair;
-import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
@@ -45,14 +43,6 @@ public class RSA {
     private static final String TAG = "EncryptUtils";
 
     /**
-     * 加密
-     */
-    private final static int MODE_ENCRYPTION = 1;
-    /**
-     * 解密
-     */
-    private final static int MODE_DECRYPTION = 2;
-    /**
      * 加密方式 RSA
      */
     private final static String RSA = "RSA";
@@ -75,26 +65,48 @@ public class RSA {
     //公钥加密
     private final static int MODE_PUBLIC = 2;
 
-    public static void encryptByRSA(String source, String dest, Key key) {
-        rasEncrypt(MODE_ENCRYPTION, source, dest, key);
+    /**
+     * RSA加密文件
+     *
+     * @param source 需要加密的文件路径
+     * @param dest   加密后文件路径
+     * @param key    加密的key
+     */
+    public static void encryptFileByRSA(String source, String dest, Key key) {
+        rsaEncrypt(Cipher.ENCRYPT_MODE, source, dest, key);
     }
 
-    public static void decryptByRSA(String source, String dest, Key key) {
-        rasEncrypt(MODE_DECRYPTION, source, dest, key);
+    /**
+     * RSA解密文件
+     *
+     * @param source 需要解密的文件路径
+     * @param dest   解密后文件路径
+     * @param key    解密的key
+     */
+    public static void decrypFileByRSA(String source, String dest, Key key) {
+        rsaEncrypt(Cipher.DECRYPT_MODE, source, dest, key);
     }
 
-    private static void rasEncrypt(int mode, String source, String dest, Key key) {
+    /**
+     * RSA加解密
+     *
+     * @param mode   加解密模式
+     * @param source 需要处理的文件路径
+     * @param dest   处理后的文件路径
+     * @param key    加解密的key
+     */
+    private static void rsaEncrypt(int mode, String source, String dest, Key key) {
         Log.i(TAG, "start===encryptByRSA mode--->>" + mode);
         FileInputStream fis = null;
         FileOutputStream fos = null;
         try {
             fis = new FileInputStream(source);
             fos = new FileOutputStream(dest);
-            int size = (mode == MODE_ENCRYPTION ? ENCRYPT_LEN : DECRYPT_LEN);
+            int size = (mode == Cipher.ENCRYPT_MODE ? ENCRYPT_LEN : DECRYPT_LEN);
             byte[] buff = new byte[size];
             byte[] buffResult;
             while ((fis.read(buff)) != -1) {
-                buffResult = (mode == MODE_ENCRYPTION ? encryptByRSA(buff, key) : decryptByRSA(buff, key));
+                buffResult = (mode == Cipher.ENCRYPT_MODE ? encryptByRSA(buff, key) : decryptByRSA(buff, key));
                 if (buffResult != null) {
                     fos.write(buffResult);
                 }
@@ -148,23 +160,6 @@ public class RSA {
         Cipher cipher = Cipher.getInstance(RSA);
         cipher.init(Cipher.DECRYPT_MODE, key);
         return cipher.doFinal(data);
-    }
-
-    /**
-     * 随机生成RSA密钥对，包括PublicKey，PrivateKey
-     *
-     * @param keyLength 秘钥长度，范围是 512~2048，一般是1024
-     * @return KeyPair 生成的秘钥对
-     */
-    public static KeyPair generateRSAKeyPair(int keyLength) {
-        try {
-            KeyPairGenerator kpg = KeyPairGenerator.getInstance("RSA");
-            kpg.initialize(keyLength);
-            return kpg.genKeyPair();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-            return null;
-        }
     }
 
 
