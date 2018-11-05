@@ -1,4 +1,4 @@
-package com.tok.aesdemo;
+package com.felix.cipherhub;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -6,11 +6,12 @@ import android.util.Log;
 import android.view.View;
 
 import com.blankj.utilcode.util.LogUtils;
-import com.tok.aesdemo.aes.AESCrypt;
-import com.tok.aesdemo.aes.AESUtils;
-import com.tok.aesdemo.aes.AesCryptoUtils;
-import com.tok.aesdemo.aes.cryptogram;
-import com.tok.aesdemo.des.SecurityEncode;
+import com.felix.cipherlibrary.aes.AESCrypt;
+import com.felix.cipherlibrary.aes.AESUtils;
+import com.felix.cipherlibrary.aes.AesCryptoUtils;
+import com.felix.cipherlibrary.aes.cryptogram;
+import com.felix.cipherlibrary.des.SecurityEncode;
+import com.tok.cipherhub.R;
 
 /**
  * @author Administrator
