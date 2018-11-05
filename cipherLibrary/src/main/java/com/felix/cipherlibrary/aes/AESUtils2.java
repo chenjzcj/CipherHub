@@ -5,7 +5,6 @@ package com.felix.cipherlibrary.aes;
  */
 
 
-
 import com.blankj.utilcode.util.LogUtils;
 import com.felix.cipherlibrary.encode.Base64;
 
@@ -24,8 +23,8 @@ import javax.crypto.spec.SecretKeySpec;
 
 
 /**
- * AESå·¥å…·ç±»;
- * ç”¨äºå¯¹ä¿¡æ¯è¿›è¡ŒåŠ è§£å¯†çš„AESå·¥å…·ç±»ï¼›
+ * AES¹¤¾ßÀà;
+ * ÓÃÓÚ¶ÔĞÅÏ¢½øĞĞ¼Ó½âÃÜµÄAES¹¤¾ßÀà£»
  * https://blog.csdn.net/Obelisk00/article/details/78248475
  *
  * @author MaLinQing
@@ -33,57 +32,57 @@ import javax.crypto.spec.SecretKeySpec;
 public class AESUtils2 {
 
     private AESUtils2() {
-    }//é™æ€å·¥å…·ç±»ï¼Œä¸éœ€è¦newå¯¹è±¡ï¼›
+    }//¾²Ì¬¹¤¾ßÀà£¬²»ĞèÒªnew¶ÔÏó£»
 
 
     /**
-     * åŠ è§£å¯†æ—¶æ‰€éœ€çš„å¯†ç ï¼Œå†…éƒ¨ä½¿ç”¨å¯ä»¥ç›´æ¥å†™æ­»ï¼Œå¤–éƒ¨è°ƒç”¨åŠ¨æ€ä¼ è¾“å¯ä»¥ç›´æ¥åœ¨å½¢å‚ä¸­å®šä¹‰
+     * ¼Ó½âÃÜÊ±ËùĞèµÄÃÜÂë£¬ÄÚ²¿Ê¹ÓÃ¿ÉÒÔÖ±½ÓĞ´ËÀ£¬Íâ²¿µ÷ÓÃ¶¯Ì¬´«Êä¿ÉÒÔÖ±½ÓÔÚĞÎ²ÎÖĞ¶¨Òå
      */
     private static final String password = "gjh%^&(&  {}77";
 
     /**
-     * AESåŠ å¯†å­—ç¬¦ä¸²
+     * AES¼ÓÃÜ×Ö·û´®
      *
-     * @param content éœ€è¦è¢«åŠ å¯†çš„å­—ç¬¦ä¸²
-     * @return å¯†æ–‡
+     * @param content ĞèÒª±»¼ÓÃÜµÄ×Ö·û´®
+     * @return ÃÜÎÄ
      */
     public static String encrypt(String content) {
         try {
-            KeyGenerator kgen = KeyGenerator.getInstance("AES");//æ„é€ å¯†é’¥ç”Ÿæˆå™¨ï¼ŒæŒ‡å®šä¸ºAESç®—æ³•,ä¸åŒºåˆ†å¤§å°å†™
+            KeyGenerator kgen = KeyGenerator.getInstance("AES");//¹¹ÔìÃÜÔ¿Éú³ÉÆ÷£¬Ö¸¶¨ÎªAESËã·¨,²»Çø·Ö´óĞ¡Ğ´
 
-            kgen.init(128, new SecureRandom(password.getBytes()));//æ ¹æ®ä¼ å…¥çš„å­—èŠ‚æ•°ç»„,ç”Ÿæˆä¸€ä¸ª128ä½çš„éšæœºæº
+            kgen.init(128, new SecureRandom(password.getBytes()));//¸ù¾İ´«ÈëµÄ×Ö½ÚÊı×é,Éú³ÉÒ»¸ö128Î»µÄËæ»úÔ´
 
-            SecretKey secretKey = kgen.generateKey();// äº§ç”ŸåŸå§‹å¯¹ç§°å¯†é’¥
+            SecretKey secretKey = kgen.generateKey();// ²úÉúÔ­Ê¼¶Ô³ÆÃÜÔ¿
 
-            byte[] enCodeFormat = secretKey.getEncoded();// è·å¾—åŸå§‹å¯¹ç§°å¯†é’¥çš„å­—èŠ‚æ•°ç»„
+            byte[] enCodeFormat = secretKey.getEncoded();// »ñµÃÔ­Ê¼¶Ô³ÆÃÜÔ¿µÄ×Ö½ÚÊı×é
 
             //Generate AES key based on byte array
             SecretKeySpec key = new SecretKeySpec(enCodeFormat, "AES");
 
-            Cipher cipher = Cipher.getInstance("AES");//æ ¹æ®æŒ‡å®šç®—æ³•AESç”Ÿæˆå¯†ç å™¨
+            Cipher cipher = Cipher.getInstance("AES");//¸ù¾İÖ¸¶¨Ëã·¨AESÉú³ÉÃÜÂëÆ÷
 
-            byte[] byteContent = content.getBytes("UTF-8"); //å°†æŠ¥æ–‡è½¬æˆå­—èŠ‚æ•°ç»„
-            //(è¿™é‡Œè¦è®¾ç½®ä¸ºutf-8)ä¸ç„¶å†…å®¹ä¸­å¦‚æœæœ‰ä¸­æ–‡å’Œè‹±æ–‡æ··åˆä¸­æ–‡å°±ä¼šè§£å¯†ä¸ºä¹±ç 
+            byte[] byteContent = content.getBytes("UTF-8"); //½«±¨ÎÄ×ª³É×Ö½ÚÊı×é
+            //(ÕâÀïÒªÉèÖÃÎªutf-8)²»È»ÄÚÈİÖĞÈç¹ûÓĞÖĞÎÄºÍÓ¢ÎÄ»ìºÏÖĞÎÄ¾Í»á½âÃÜÎªÂÒÂë
 
-            //Initialization cipherï¼Œ
+            //Initialization cipher£¬
             cipher.init(Cipher.ENCRYPT_MODE, key);
 
-            byte[] ciphertext = cipher.doFinal(byteContent);// åŠ å¯†
+            byte[] ciphertext = cipher.doFinal(byteContent);// ¼ÓÃÜ
 
             return (Base64.encode(ciphertext));
 
         } catch (NoSuchPaddingException e) {
-            LogUtils.e("ç”Ÿæˆcipherå¯†ç å™¨å¼‚å¸¸ï¼å¼‚å¸¸ä¿¡æ¯ï¼š{}", e);
+            LogUtils.e("Éú³ÉcipherÃÜÂëÆ÷Òì³££¡Òì³£ĞÅÏ¢£º{}", e);
         } catch (NoSuchAlgorithmException e) {
-            LogUtils.e("æ— æ³•é€šè¿‡AESåŠ å¯†ç®—æ³•ç”Ÿæˆcipherå¼‚å¸¸ï¼å¼‚å¸¸ä¿¡æ¯ï¼š{}", e);
+            LogUtils.e("ÎŞ·¨Í¨¹ıAES¼ÓÃÜËã·¨Éú³ÉcipherÒì³££¡Òì³£ĞÅÏ¢£º{}", e);
         } catch (UnsupportedEncodingException e) {
-            LogUtils.e("byteContent-UTF-8å­—ç¬¦è½¬æ¢å¼‚å¸¸ï¼å¼‚å¸¸ä¿¡æ¯ï¼š{}", e);
+            LogUtils.e("byteContent-UTF-8×Ö·û×ª»»Òì³££¡Òì³£ĞÅÏ¢£º{}", e);
         } catch (InvalidKeyException e) {
-            LogUtils.e("cipheråˆå§‹åŒ–å¤±è´¥å¼‚å¸¸ï¼å¼‚å¸¸ä¿¡æ¯ï¼š{}", e);
+            LogUtils.e("cipher³õÊ¼»¯Ê§°ÜÒì³££¡Òì³£ĞÅÏ¢£º{}", e);
         } catch (IllegalBlockSizeException e) {
-            LogUtils.e("æ•°æ®é•¿åº¦ä¸æ­£ç¡®å¯¼è‡´æŠ¥æ–‡åŠ å¯†å¤±è´¥ï¼å¼‚å¸¸ä¿¡æ¯ï¼š{}", e);
+            LogUtils.e("Êı¾İ³¤¶È²»ÕıÈ·µ¼ÖÂ±¨ÎÄ¼ÓÃÜÊ§°Ü£¡Òì³£ĞÅÏ¢£º{}", e);
         } catch (BadPaddingException e) {
-            LogUtils.e("byteContentæœªæ­£ç¡®è½¬æ¢-å¯¼è‡´æŠ¥æ–‡åŠ å¯†å¤±è´¥ï¼å¼‚å¸¸ä¿¡æ¯ï¼š{}", e);
+            LogUtils.e("byteContentÎ´ÕıÈ·×ª»»-µ¼ÖÂ±¨ÎÄ¼ÓÃÜÊ§°Ü£¡Òì³£ĞÅÏ¢£º{}", e);
         }
         return null;
     }
@@ -92,44 +91,45 @@ public class AESUtils2 {
      * Decrypt AES encrypted string
      *
      * @param content AES encrypted content
-     * @return æ˜æ–‡
+     * @return Ã÷ÎÄ
      */
     public static String decrypt(String content) {
         try {
             //Construct a key generator, designated as the AES algorithm, not case sensitive.
             KeyGenerator kgen = KeyGenerator.getInstance("AES");
-
             //A random source of 128 bits is generated based on the incoming byte array.
             kgen.init(128, new SecureRandom(password.getBytes()));
+            //²úÉúÔ­Ê¼¶Ô³ÆÃÜÔ¿
+            SecretKey secretKey = kgen.generateKey();
+            //»ñµÃÔ­Ê¼¶Ô³ÆÃÜÔ¿µÄ×Ö½ÚÊı×é
+            byte[] enCodeFormat = secretKey.getEncoded();
+            //¸ù¾İ×Ö½ÚÊı×éÉú³ÉAESÃÜÔ¿
+            SecretKeySpec key = new SecretKeySpec(enCodeFormat, "AES");
+            // ´´½¨ÃÜÂëÆ÷
+            Cipher cipher = Cipher.getInstance("AES");
+            // ³õÊ¼»¯Îª½âÃÜÄ£Ê½µÄÃÜÂëÆ÷
+            cipher.init(Cipher.DECRYPT_MODE, key);
 
-            SecretKey secretKey = kgen.generateKey();//äº§ç”ŸåŸå§‹å¯¹ç§°å¯†é’¥
+            //½«ÃÜÎÄ½âÂë³É×Ö½ÚÊı×é
+            byte[] byteContent = Base64.decode(content);
 
-            byte[] enCodeFormat = secretKey.getEncoded();//è·å¾—åŸå§‹å¯¹ç§°å¯†é’¥çš„å­—èŠ‚æ•°ç»„
-
-            SecretKeySpec key = new SecretKeySpec(enCodeFormat, "AES");//æ ¹æ®å­—èŠ‚æ•°ç»„ç”ŸæˆAESå¯†é’¥
-
-            Cipher cipher = Cipher.getInstance("AES");// åˆ›å»ºå¯†ç å™¨
-
-            cipher.init(Cipher.DECRYPT_MODE, key);// åˆå§‹åŒ–ä¸ºè§£å¯†æ¨¡å¼çš„å¯†ç å™¨
-
-            byte[] byteContent = Base64.decode(content);//å°†å¯†æ–‡è§£ç æˆå­—èŠ‚æ•°ç»„
-
-            byte[] byteDecode = cipher.doFinal(byteContent); //è§£å¯†ï¼›
+            //½âÃÜ£»
+            byte[] byteDecode = cipher.doFinal(byteContent);
 
             return new String(byteDecode, "UTF-8");
 
         } catch (NoSuchAlgorithmException e) {
-            LogUtils.e("æ— æ³•é€šè¿‡AESåŠ å¯†ç®—æ³•ç”Ÿæˆcipherå¼‚å¸¸ï¼å¼‚å¸¸ä¿¡æ¯ï¼š{}", e);
+            LogUtils.e("ÎŞ·¨Í¨¹ıAES¼ÓÃÜËã·¨Éú³ÉcipherÒì³££¡Òì³£ĞÅÏ¢£º{}", e);
         } catch (NoSuchPaddingException e) {
-            LogUtils.e("ç”Ÿæˆcipherå¯†ç å™¨å¼‚å¸¸ï¼å¼‚å¸¸ä¿¡æ¯ï¼š{}", e);
+            LogUtils.e("Éú³ÉcipherÃÜÂëÆ÷Òì³££¡Òì³£ĞÅÏ¢£º{}", e);
         } catch (InvalidKeyException e) {
-            LogUtils.e("cipheråˆå§‹åŒ–å¤±è´¥å¼‚å¸¸ï¼å¼‚å¸¸ä¿¡æ¯ï¼š{}", e);
+            LogUtils.e("cipher³õÊ¼»¯Ê§°ÜÒì³££¡Òì³£ĞÅÏ¢£º{}", e);
         } catch (IllegalBlockSizeException e) {
-            LogUtils.e("æ•°æ®é•¿åº¦ä¸æ­£ç¡®å¯¼è‡´æŠ¥æ–‡åŠ å¯†å¤±è´¥ï¼å¼‚å¸¸ä¿¡æ¯ï¼š{}", e);
+            LogUtils.e("Êı¾İ³¤¶È²»ÕıÈ·µ¼ÖÂ±¨ÎÄ¼ÓÃÜÊ§°Ü£¡Òì³£ĞÅÏ¢£º{}", e);
         } catch (BadPaddingException e) {
-            LogUtils.e("byteContentæœªæ­£ç¡®è½¬æ¢-å¯¼è‡´æŠ¥æ–‡åŠ å¯†å¤±è´¥ï¼å¼‚å¸¸ä¿¡æ¯ï¼š{}", e);
+            LogUtils.e("byteContentÎ´ÕıÈ·×ª»»-µ¼ÖÂ±¨ÎÄ¼ÓÃÜÊ§°Ü£¡Òì³£ĞÅÏ¢£º{}", e);
         } catch (UnsupportedEncodingException e) {
-            LogUtils.e("byteDecode-UTF-8å­—ç¬¦è½¬æ¢å¼‚å¸¸ï¼å¼‚å¸¸ä¿¡æ¯ï¼š{}", e);
+            LogUtils.e("byteDecode-UTF-8×Ö·û×ª»»Òì³££¡Òì³£ĞÅÏ¢£º{}", e);
         }
         return null;
     }

@@ -10,12 +10,12 @@ import javax.crypto.spec.SecretKeySpec;
  */
 public class AESUtils3 {
     /**
-     * ç®—æ³•/æ¨¡å¼/å¡«å……
+     * Ëã·¨/Ä£Ê½/Ìî³ä
      */
     private static final String CIPHER_MODE = "AES/ECB/PKCS5Padding";
 
     /**
-     * åˆ›å»ºå¯†é’¥
+     * ´´½¨ÃÜÔ¿
      */
     private static SecretKeySpec createKey(String password) {
         byte[] data = null;
@@ -40,7 +40,7 @@ public class AESUtils3 {
     }
 
     /**
-     * åŠ å¯†å­—èŠ‚æ•°æ®
+     * ¼ÓÃÜ×Ö½ÚÊı¾İ
      */
     public static byte[] encrypt(byte[] content, String password) {
         try {
@@ -71,7 +71,7 @@ public class AESUtils3 {
     }
 
     /**
-     * è§£å¯†å­—èŠ‚æ•°ç»„
+     * ½âÃÜ×Ö½ÚÊı×é
      */
     private static byte[] decrypt(byte[] content, String password) {
         try {
@@ -86,7 +86,7 @@ public class AESUtils3 {
     }
 
     /**
-     * è§£å¯†16è¿›åˆ¶çš„å­—ç¬¦ä¸²ä¸ºå­—ç¬¦ä¸²
+     * ½âÃÜ16½øÖÆµÄ×Ö·û´®Îª×Ö·û´®
      */
     public static String decrypt(String content, String password) {
         byte[] data = null;
@@ -109,25 +109,25 @@ public class AESUtils3 {
     }
 
     /**
-     * å­—èŠ‚æ•°ç»„è½¬æˆ16è¿›åˆ¶å­—ç¬¦ä¸²
+     * Byte array to 16 binary string
      */
-    private static String byte2hex(byte[] b) { // ä¸€ä¸ªå­—èŠ‚çš„æ•°ï¼Œ
+    private static String byte2hex(byte[] b) {
         StringBuilder sb = new StringBuilder(b.length * 2);
         String tmp;
         for (byte aB : b) {
-            // æ•´æ•°è½¬æˆåå…­è¿›åˆ¶è¡¨ç¤º
+            // ÕûÊı×ª³ÉÊ®Áù½øÖÆ±íÊ¾
             tmp = (Integer.toHexString(aB & 0XFF));
             if (tmp.length() == 1) {
                 sb.append("0");
             }
             sb.append(tmp);
         }
-        // è½¬æˆå¤§å†™
+        // ×ª³É´óĞ´
         return sb.toString().toUpperCase();
     }
 
     /**
-     * å°†hexå­—ç¬¦ä¸²è½¬æ¢æˆå­—èŠ‚æ•°ç»„
+     * ½«hex×Ö·û´®×ª»»³É×Ö½ÚÊı×é
      */
     private static byte[] hex2byte(String inputString) {
         if (inputString == null || inputString.length() < 2) {

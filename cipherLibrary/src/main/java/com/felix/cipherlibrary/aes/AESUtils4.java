@@ -12,17 +12,17 @@ import javax.crypto.spec.SecretKeySpec;
 public class AESUtils4 {
     private static final String TAG = "AESUtils";
 
-    // CBC(Cipher Block Chaining, åŠ å¯†å¿«é“¾)æ¨¡å¼ï¼ŒPKCS7Paddingè¡¥ç æ–¹å¼
-    // AESæ˜¯åŠ å¯†æ–¹å¼ CBCæ˜¯å·¥ä½œæ¨¡å¼ PKCS5Paddingæ˜¯å¡«å……æ¨¡å¼
+    // CBC(Cipher Block Chaining, ¼ÓÃÜ¿ìÁ´)Ä£Ê½£¬PKCS7Padding²¹Âë·½Ê½
+    // AESÊÇ¼ÓÃÜ·½Ê½ CBCÊÇ¹¤×÷Ä£Ê½ PKCS5PaddingÊÇÌî³äÄ£Ê½
     private static final String CBC_PKCS5_PADDING = "AES/CBC/PKCS5Padding";
-    // AES åŠ å¯†
+    // AES ¼ÓÃÜ
     private static final String AES = "AES";
-    // å¯†é’¥åç§»é‡
+    // ÃÜÔ¿Æ«ÒÆÁ¿
     private static final String mstrIvParameter = "1234567890123456";
-    /* keyå¿…é¡»ä¸º16ä½ï¼Œå¯æ›´æ”¹ä¸ºè‡ªå·±çš„key */
+    /* key±ØĞëÎª16Î»£¬¿É¸ü¸ÄÎª×Ô¼ºµÄkey */
     //String mstrTestKey = "1234567890123456";
 
-    // åŠ å¯†
+    // ¼ÓÃÜ
     public static String encrypt(String strKey, String strClearText) throws Exception {
         // //Log.d(TAG, "### begin encrypt: ");
         // //Log.d(TAG, "key = " + strKey + ",ClearText: " + strClearText);
@@ -64,7 +64,7 @@ public class AESUtils4 {
         return null;
     }
 
-    // è§£å¯†
+    // ½âÃÜ
     public static String decrypt(String strKey, String strCipherText) throws Exception {
          // //Log.d(TAG, "### begin decrypt: ");
          //Log.d(TAG, "key = " + strKey + ",CipherText: " + strCipherText);
@@ -113,22 +113,22 @@ public class AESUtils4 {
     public static void main(String[] args) {
         String content = "MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAILho76AqLkeilrjmOUCKhXQAe9Ul4QzfiS/y0HXmdx64mPtvukXi++dJGTWuIMxwlXR4+0ynb1yPRX+hV10yAkCAwEAAQ==";
         String password = "da09a9528b9c710addd8439684e09608";
-        //åŠ å¯†
-        System.out.println("åŠ å¯†å‰ï¼š" + content);
+        //¼ÓÃÜ
+        System.out.println("¼ÓÃÜÇ°£º" + content);
         String encryptResultStr = null;
         try {
             encryptResultStr = encrypt(password,content);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("åŠ å¯†åï¼š" + encryptResultStr);
-        //è§£å¯†
+        System.out.println("¼ÓÃÜºó£º" + encryptResultStr);
+        //½âÃÜ
         String decryptResult = null;
         try {
             decryptResult = decrypt(password,encryptResultStr);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("è§£å¯†åï¼š" + decryptResult);
+        System.out.println("½âÃÜºó£º" + decryptResult);
     }
 }
