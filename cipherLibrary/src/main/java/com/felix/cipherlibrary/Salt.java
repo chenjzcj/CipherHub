@@ -2,7 +2,7 @@ package com.felix.cipherlibrary;
 
 /**
  * Created by Felix.Zhong on 2018/9/29 12:07
- * 应用通用盐值
+ * Application of common salt value
  */
 public enum Salt {
     /**

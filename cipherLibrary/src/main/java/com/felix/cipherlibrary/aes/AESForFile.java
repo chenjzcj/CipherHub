@@ -20,11 +20,11 @@ import javax.crypto.spec.SecretKeySpec;
  * <p>
  * AES 对称加密
  * 高级加密标准（英语：Advanced Encryption Standard，缩写：AES），在密码学中又称Rijndael加密法，
- * 是美国联邦政府采用的一种区块加密标准。 这个标准用来替代原先的DES，已经被多方分析且广为全世界所使用。
- * Android 中的AES 加密 秘钥 key 必须为16/24/32位字节，否则抛异常
+ * It is a block encryption standard adopted by the federal government of the United States. This standard is used to replace the original DES, which has been widely analyzed and widely used all over the world.
+ * The AES encryption secret key key in Android must be 16/24/32 bit bytes, otherwise throw exceptions.
  * <p>
- * 总结：
- * AES对称加密，加解密相比于亦或加密还是有点复杂的，安全性也比亦或加密高，AES加密不是绝对的安全。
+ * summary:
+ * AES symmetric encryption, encryption and decryption compared with or encryption is still a bit complex, security is also higher than or encryption, AES encryption is not absolute security.
  * <p>
  * 功能说明：对文件进行AES加密（验证可用）
  */
@@ -39,7 +39,7 @@ public class AESForFile {
      */
     private final static int MODE_DECRYPTION = 2;
     /**
-     * AES 秘钥key，必须为16位
+     * AES secret key key must be 16 bits.
      */
     private final static String AES_KEY = "xjp_12345!^-=42#";
 
@@ -47,7 +47,7 @@ public class AESForFile {
     /**
      * AES 加密
      *
-     * @param source 需要加密的文件路径
+     * @param source Encrypted file path
      * @param dest   加密后的文件路径
      */
     public static void encryptByAES(String source, String dest) {
@@ -57,7 +57,7 @@ public class AESForFile {
     /**
      * AES 解密
      *
-     * @param source 需要解密的文件路径
+     * @param source File path to be decrypted
      * @param dest   解密后保存的文件路径
      */
     public static void decryptByAES(String source, String dest) {

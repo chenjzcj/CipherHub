@@ -6,7 +6,7 @@ package com.felix.cipherlibrary.encode;
  */
 public final class Base64 {
     /**
-     * Base64编码表。
+     * Base64 encoding table
      */
     private static final char[] BASE64CODE = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
             'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
@@ -14,17 +14,17 @@ public final class Base64 {
             '4', '5', '6', '7', '8', '9', '+', '/',};
 
     /**
-     * Base64解码表。
+     * Base64 decoding table
      */
     private static final byte[] BASE64DECODE = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-            // 注意两个63，为兼容SMP，
+            // Pay attention to two 63, which is compatible with SMP.
             -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-            // “/”和“-”都翻译成63。
+            // "/" and "-" are translated into 63.
             -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 62, -1, 63, -1, 63,
             52, 53, 54, 55, 56, 57, 58, 59, 60, 61, -1, -1, -1, 0, -1, -1, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,
-            // 注意两个0：
+            // Pay attention to two 0:
             13, 14,
-            // “A”和“=”都翻译成0。
+            // "A" and "=" are translated into 0.
             15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, -1, -1, -1, -1, -1,
             -1, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51,
             -1, -1, -1, -1, -1,};
@@ -60,21 +60,21 @@ public final class Base64 {
     private static final int NUMBER_EIGHTEEN = 18;
 
     /**
-     * 构造方法私有化，防止实例化。
+     * The construction method is privatized to prevent instantiation.
      */
     private Base64() {
     }
 
     /**
-     * Base64编码。将字节数组中字节3个一组编码成4个可见字符。
+     * Base64 encoding. Encodes 3 bytes of byte array into 4 visible characters.
      *
-     * @param b 需要被编码的字节数据。
-     * @return 编码后的Base64字符串。
+     * @param b Byte data that needs to be encoded.
+     * @return The encoded Base64 string.
      */
     public static String encode(byte[] b) {
         int code = 0;
 
-        // 按实际编码后长度开辟内存，加快速度
+        // Open memory and speed up according to actual coding length.
         StringBuilder sb = new StringBuilder(((b.length - 1) / NUMBER_THREE) << NUMBER_TWO + NUMBER_FOUR);
 
         // 进行编码
@@ -90,7 +90,7 @@ public final class Base64 {
             }
         }
 
-        // 对于长度非3的整数倍的字节数组，编码前先补0，编码后结尾处编码用=代替，
+        // For byte arrays of non-3 integer lengths, zero is added before encoding, and = is used at the end of encoding.
         // =的个数和短缺的长度一致，以此来标识出数据实际长度
         if (b.length % NUMBER_THREE > 0) {
             sb.setCharAt(sb.length() - 1, '=');
@@ -102,13 +102,13 @@ public final class Base64 {
     }
 
     /**
-     * Base64解码。
+     * Base64 decoding.
      *
-     * @param code 用Base64编码的ASCII字符串
+     * @param code ASCII string encoded by Base64
      * @return 解码后的字节数据
      */
     public static byte[] decode(String code) {
-        // 检查参数合法性
+        // Checking the legality of parameters
         if (code == null) {
             return null;
         }
@@ -120,7 +120,7 @@ public final class Base64 {
             return new byte[0];
         }
 
-        // 统计填充的等号个数
+        // The number of equal numbers filled in Statistics
         int pad = 0;
         if (code.charAt(len - 1) == '=') {
             pad++;

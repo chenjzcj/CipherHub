@@ -21,7 +21,7 @@ import javax.crypto.Cipher;
  */
 public class RSAUtils {
     /**
-     * 构建Cipher实例时所传入的的字符串，默认为"RSA/NONE/PKCS1Padding"
+     * The string that is passed when constructing the Cipher instance is defaults to "RSA/NONE/PKCS1Padding".
      */
     private static String sTransform = "RSA/NONE/PKCS1Padding";
 
@@ -34,6 +34,9 @@ public class RSAUtils {
 
     /**
      * 初始化方法，设置参数
+     *
+     * @param transform  transform
+     * @param base64Mode base64Mode
      */
     public static void init(String transform, int base64Mode) {
         sTransform = transform;
@@ -43,7 +46,7 @@ public class RSAUtils {
     /**
      * 随机生成RSA密钥对，包括PublicKey，PrivateKey
      *
-     * @param keyLength 密钥对长度，范围是 512~2048，一般是1024，
+     * @param keyLength The length of key pairs is 512~2048, usually 1024.
      *                  如果小于512会报错：java.security.InvalidParameterException: RSA keys must be at least 512 bits long
      * @return KeyPair 生成的密钥对
      */
@@ -54,7 +57,7 @@ public class RSAUtils {
             KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
             //设置密钥长度
             keyPairGenerator.initialize(keyLength);
-            //产生密钥对
+            //Generate key pair
             keyPair = keyPairGenerator.genKeyPair();
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
@@ -64,17 +67,17 @@ public class RSAUtils {
 
 
     /**
-     * 加密或解密数据的通用的方法
+     * A general way to encrypt or decrypt data
      *
      * @param srcData 待处理的数据
-     * @param key     公钥或者私钥
-     * @param mode    指加密还是解密，值为Cipher.ENCRYPT_MODE或者Cipher.DECRYPT_MODE
+     * @param key     Public key or private key
+     * @param mode    Refers to encryption or decryption, the value is Cipher.ENCRYPT_MODE or Cipher.DECRYPT_MODE
      * @return 处理后的字节数组
      */
     private static byte[] processData(byte[] srcData, Key key, int mode) {
-        //用来保存处理的结果
+        //Results saved for processing
         byte[] resultBytes = null;
-        //构建Cipher对象，需要传入一个字符串，格式必须为"algorithm/mode/padding"或者"algorithm/",意为"算法/加密模式/填充方式"
+        //To build a Cipher object, you need to pass in a string in either "algorithm/mode/padding" or "algorithm/", meaning "algorithm/encryption mode/padding mode".
         try {
             Cipher cipher = Cipher.getInstance(TRANSFORMATION_RSA);
             //初始化Cipher,mode指定是加密还是解密，key为公钥或密钥
@@ -112,11 +115,11 @@ public class RSAUtils {
     }
 
     /**
-     * 使用私钥解密，返回解码数据
+     * Use private key to decrypt and return decoded data.
      *
      * @param encryptedData 待处理的数据
      * @param privateKey    私钥
-     * @return 解密后的字符串
+     * @return Decrypted string
      */
     public static String decryptToStrByPrivate(String encryptedData, PrivateKey privateKey) {
         return new String(decryptDataByPrivate(encryptedData, privateKey));
@@ -127,8 +130,8 @@ public class RSAUtils {
      * 通过公钥进行RSA解密
      *
      * @param key  解密公钥
-     * @param data 需要解密的密文
-     * @return 解密出来的结果
+     * @param data Cryptogram that needs to be decrypted
+     * @return Decrypted results
      */
     public static String decryptDataByPublic(String key, String data) {
         String signature = "";

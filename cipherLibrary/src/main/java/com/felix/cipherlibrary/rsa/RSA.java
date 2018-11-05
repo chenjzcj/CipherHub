@@ -21,21 +21,22 @@ import javax.crypto.Cipher;
  * Created by Felix.Zhong on 2018/7/26 18:10
  * https://blog.csdn.net/feiduclear_up/article/details/73604507
  * <p>
- * 什么是RSA加密？
+ * What is RSA encryption?
  * <p>
- * RSA算法是最流行的公钥密码算法，使用长度可以变化的密钥。RSA是第一个既能用于数据加密也能用于数字签名的算法。
+ * RSA algorithm is the most popular public key cryptography algorithm, using the key that can be changed in length.
+ * RSA is the first algorithm that can be used both for data encryption and for digital signature.
  * <p>
- * RSA的安全性依赖于大数分解，小于1024位的N已经被证明是不安全的，而且由于RSA算法进行的都是大数计算，
- * 使得RSA最快的情况也比DES慢上倍，这是RSA最大的缺陷，因此通常只能用于加密少量数据或者加密密钥，但RSA仍然不失为一种高强度的算法。
+ * The security of RSA depends on large number decomposition. N less than 1024 bits has been proved to be unsafe, and because RSA algorithm performs large number calculation.
+ * The fastest RSA is twice as slow as DES, which is the biggest drawback of RSA, so it can only be used to encrypt a small amount of data or encryption keys, but RSA is still a high-strength algorithm.
  * <p>
- * 总结：
- * 1.AES公钥加密，私钥解密
+ * summary:
+ * 1.AES public key encryption, private key decryption
  * 2.AES加密耗时
  * 3.AES加密后数据会变大
  */
 public class RSA {
     /**************************************************
-     * 1.什么是RSA 非对称加密？
+     * 1.What is RSA asymmetric encryption?
      * <p>
      * 2.
      *************************************************/
@@ -68,8 +69,8 @@ public class RSA {
     /**
      * RSA加密文件
      *
-     * @param source 需要加密的文件路径
-     * @param dest   加密后文件路径
+     * @param source Encrypted file path
+     * @param dest   Encrypted file path
      * @param key    加密的key
      */
     public static void encryptFileByRSA(String source, String dest, Key key) {
@@ -79,8 +80,8 @@ public class RSA {
     /**
      * RSA解密文件
      *
-     * @param source 需要解密的文件路径
-     * @param dest   解密后文件路径
+     * @param source File path to be decrypted
+     * @param dest   File path after declassified
      * @param key    解密的key
      */
     public static void decrypFileByRSA(String source, String dest, Key key) {
@@ -88,10 +89,10 @@ public class RSA {
     }
 
     /**
-     * RSA加解密
+     * RSA encryption and decryption
      *
-     * @param mode   加解密模式
-     * @param source 需要处理的文件路径
+     * @param mode   Encryption and decryption mode
+     * @param source File path to be processed
      * @param dest   处理后的文件路径
      * @param key    加解密的key
      */
@@ -135,7 +136,7 @@ public class RSA {
     /**
      * 私钥加密
      *
-     * @param data 需要被加密的数据
+     * @param data Data that needs to be encrypted
      * @param key  私钥
      * @return 加密后的数据
      * @throws Exception 异常
@@ -151,7 +152,7 @@ public class RSA {
     /**
      * 公钥解密
      *
-     * @param data 待解密数据
+     * @param data Data to be decrypted
      * @param key  密钥
      * @return byte[] 解密数据
      */
@@ -168,8 +169,8 @@ public class RSA {
      *
      * @param key 秘钥
      * @return PrivateKey 私钥
-     * @throws NoSuchAlgorithmException 没有这样的算法异常
-     * @throws InvalidKeySpecException  无效的密钥规范异常
+     * @throws NoSuchAlgorithmException No such algorithm is abnormal.
+     * @throws InvalidKeySpecException  Invalid key specification exception
      */
     public static PrivateKey getPrivateKey(String key) throws NoSuchAlgorithmException, InvalidKeySpecException {
         byte[] privateKey = Base64.decode(key, Base64.URL_SAFE);
@@ -183,8 +184,8 @@ public class RSA {
      *
      * @param key 秘钥
      * @return PublicKey 公钥
-     * @throws NoSuchAlgorithmException 没有这样的算法异常
-     * @throws InvalidKeySpecException  无效的密钥规范异常
+     * @throws NoSuchAlgorithmException No such algorithm is abnormal.
+     * @throws InvalidKeySpecException  Invalid key specification exception
      */
     public static PublicKey getPublicKey(String key) throws NoSuchAlgorithmException, InvalidKeySpecException {
         byte[] publicKey = Base64.decode(key, Base64.URL_SAFE);

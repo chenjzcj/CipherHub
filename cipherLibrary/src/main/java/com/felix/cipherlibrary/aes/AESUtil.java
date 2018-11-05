@@ -14,7 +14,7 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
 /**
- * AES加密解密工具类
+ * AES encryption and decryption tools category
  *
  * @author M-Y
  * 验证不可用，报错java.lang.ExceptionInInitializerError
@@ -27,9 +27,9 @@ public class AESUtil {
     /**
      * 加密
      *
-     * @param data 需要加密的内容
+     * @param data Content that needs encryption
      * @param key  加密密码
-     * @return
+     * @return String
      */
     public static String encrypt(String data, String key) {
         return doAES(data, key, Cipher.ENCRYPT_MODE);
@@ -38,27 +38,27 @@ public class AESUtil {
     /**
      * 解密
      *
-     * @param data 待解密内容
+     * @param data Contents to be declassified
      * @param key  解密密钥
-     * @return
+     * @return String
      */
     public static String decrypt(String data, String key) {
         return doAES(data, key, Cipher.DECRYPT_MODE);
     }
 
     /**
-     * 加解密
+     * Encryption and decryption
      *
-     * @param data 待处理数据
+     * @param data Data to be processed
      * @param mode 加解密mode
-     * @return
+     * @return String
      */
     private static String doAES(String data, String key, int mode) {
         try {
             if (TextUtils.isEmpty(data) || TextUtils.isEmpty(key)) {
                 return null;
             }
-            //判断是加密还是解密
+            //Is encryption encrypted or decrypted?
             boolean encrypt = mode == Cipher.ENCRYPT_MODE;
             byte[] content;
             //true 加密内容 false 解密内容
@@ -67,24 +67,26 @@ public class AESUtil {
             } else {
                 content = parseHexStr2Byte(data);
             }
-            //1.构造密钥生成器，指定为AES算法,不区分大小写
+            //1.Construct a key generator, designated as the AES algorithm, not case sensitive.
             KeyGenerator kgen = KeyGenerator.getInstance(KEY_AES);
             //2.根据ecnodeRules规则初始化密钥生成器
-            //生成一个128位的随机源,根据传入的字节数组
+            //Generates a 128 bit random source, based on the incoming byte array.
             kgen.init(128, new SecureRandom(key.getBytes()));
             //3.产生原始对称密钥
             SecretKey secretKey = kgen.generateKey();
-            //4.获得原始对称密钥的字节数组
+            //4.Gets the byte array of the original symmetric key.
             byte[] enCodeFormat = secretKey.getEncoded();
             //5.根据字节数组生成AES密钥
             SecretKeySpec keySpec = new SecretKeySpec(enCodeFormat, KEY_AES);
-            //6.根据指定算法AES自成密码器
-            Cipher cipher = Cipher.getInstance("AES/ECB/NoPadding");// 创建密码器
-            //7.初始化密码器，第一个参数为加密(Encrypt_mode)或者解密解密(Decrypt_mode)操作，第二个参数为使用的KEY
-            cipher.init(mode, keySpec);// 初始化
+            //6.Generate cipher based on the specified algorithm AES
+            // Create a cipher
+            Cipher cipher = Cipher.getInstance("AES/ECB/NoPadding");
+            //7.Initialize the cipher, the first parameter is the Encrypt_mode or Decrypt_mode operation, and the second parameter is the KEY used.
+            // Initialization
+            cipher.init(mode, keySpec);
             byte[] result = cipher.doFinal(content);
             if (encrypt) {
-                //将二进制转换成16进制
+                //Converting binary to 16 binary system
                 return parseByte2HexStr(result);
             } else {
                 LogUtils.i("result = " + Arrays.toString(result));
@@ -97,10 +99,10 @@ public class AESUtil {
     }
 
     /**
-     * 将二进制转换成16进制
+     * Converting binary to 16 binary system
      *
-     * @param buf
-     * @return
+     * @param buf byte
+     * @return String
      */
     public static String parseByte2HexStr(byte buf[]) {
         StringBuilder sb = new StringBuilder();
@@ -115,10 +117,10 @@ public class AESUtil {
     }
 
     /**
-     * 将16进制转换为二进制
+     * Converting 16 binary to binary
      *
-     * @param hexStr
-     * @return
+     * @param hexStr String
+     * @return byte[]
      */
     public static byte[] parseHexStr2Byte(String hexStr) {
         if (hexStr.length() < 1) {

@@ -37,7 +37,7 @@ public class AESCrypt {
 
     private byte[] getRawKey(byte[] seed) throws Exception {
         KeyGenerator kgen = KeyGenerator.getInstance("AES");
-        // SHA1PRNG 强随机种子算法, 要区别4.2以上版本的调用方法  
+        // SHA1PRNG strong random seed algorithm, it is necessary to distinguish more than 4.2 versions of the call method.
         SecureRandom sr = null;
         if (android.os.Build.VERSION.SDK_INT >= 17) {
             sr = SecureRandom.getInstance("SHA1PRNG", "Crypto");
@@ -91,14 +91,14 @@ public class AESCrypt {
         String content = "MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAILho76AqLkeilrjmOUCKhXQAe9Ul4QzfiS/y0HXmdx64mPtvukXi++dJGTWuIMxwlXR4+0ynb1yPRX+hV10yAkCAwEAAQ==";
         String password = "da09a9528b9c710addd8439684e09608";
         try {
-            System.out.println("加密前 " + content);
+            System.out.println("before encode " + content);
 
             AESCrypt aesCrypt = new AESCrypt();
             String encryptingCode = aesCrypt.encrypt(password, content);
-            System.out.println("加密后 " + encryptingCode);
+            System.out.println("after encode " + encryptingCode);
 
             String decryptingCode = aesCrypt.decrypt(password, encryptingCode);
-            System.out.println("解密后 " + decryptingCode);
+            System.out.println("after decode " + decryptingCode);
         } catch (Exception e) {
             System.out.println("e " + e);
             e.printStackTrace();

@@ -7,7 +7,7 @@ import java.security.GeneralSecurityException;
 /**
  * Created by Felix.Zhong on 2018/9/30 15:16
  * https://github.com/scottyab/AESCrypt-Android(已经验证报错：Cannot find any provider supporting AES/CBC/PKCS7Padding)
- * 验证不可用
+ * Validation is not available
  */
 public class AESTest {
 

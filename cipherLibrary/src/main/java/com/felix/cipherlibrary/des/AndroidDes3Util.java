@@ -1,7 +1,6 @@
 package com.felix.cipherlibrary.des;
 
 
-
 import com.felix.cipherlibrary.Base64;
 
 import java.security.Key;
@@ -13,25 +12,25 @@ import javax.crypto.spec.IvParameterSpec;
 
 /**
  * Created by Felix.Zhong on 2018/10/9 10:39
- * Android 3DESåŠ å¯†å·¥å…·ç±»
+ * Android 3DES¼ÓÃÜ¹¤¾ßÀà
  * https://www.cnblogs.com/oc-bowen/p/5622914.html
- * å¯ä»¥åŠ è§£å¯†æˆåŠŸ
+ * ¿ÉÒÔ¼Ó½âÃÜ³É¹¦
  */
 public class AndroidDes3Util {
 
-    // å¯†é’¥ é•¿åº¦ä¸å¾—å°äº24
+    // ÃÜÔ¿ ³¤¶È²»µÃĞ¡ÓÚ24
     private final static String secretKey = "123456789012345678901234";
-    // å‘é‡ å¯æœ‰å¯æ—  ç»ˆç«¯åå°ä¹Ÿè¦çº¦å®š
+    // ÏòÁ¿ ¿ÉÓĞ¿ÉÎŞ ÖÕ¶ËºóÌ¨Ò²ÒªÔ¼¶¨
     private final static String iv = "01234567";
-    // åŠ è§£å¯†ç»Ÿä¸€ä½¿ç”¨çš„ç¼–ç æ–¹å¼
+    // ¼Ó½âÃÜÍ³Ò»Ê¹ÓÃµÄ±àÂë·½Ê½
     private final static String encoding = "utf-8";
 
     /**
-     * 3DESåŠ å¯†
+     * 3DES¼ÓÃÜ
      *
-     * @param plainText æ™®é€šæ–‡æœ¬
-     * @return
-     * @throws Exception
+     * @param plainText ÆÕÍ¨ÎÄ±¾
+     * @return String
+     * @throws Exception Exception
      */
     public static String encode(String plainText) throws Exception {
         Key deskey = null;
@@ -47,11 +46,11 @@ public class AndroidDes3Util {
     }
 
     /**
-     * 3DESè§£å¯†
+     * 3DES½âÃÜ
      *
-     * @param encryptText åŠ å¯†æ–‡æœ¬
-     * @return
-     * @throws Exception
+     * @param encryptText ¼ÓÃÜÎÄ±¾
+     * @return String
+     * @throws Exception Exception
      */
     public static String decode(String encryptText) throws Exception {
         Key deskey = null;

@@ -23,8 +23,8 @@ import javax.crypto.spec.SecretKeySpec;
 
 
 /**
- * AES工具类;
- * 用于对信息进行加解密的AES工具类；
+ * AES tool class;
+ * AES tool class used for encryption and decryption of information;
  * https://blog.csdn.net/Obelisk00/article/details/78248475
  *
  * @author MaLinQing
@@ -32,36 +32,36 @@ import javax.crypto.spec.SecretKeySpec;
 public class AESUtils2 {
 
     private AESUtils2() {
-    }//静态工具类，不需要new对象；
+    }//Static tool classes do not require new objects;
 
 
     /**
-     * 加解密时所需的密码，内部使用可以直接写死，外部调用动态传输可以直接在形参中定义
+     * The password needed for encryption and decryption can be written to death directly by internal use, and the dynamic transmission of external calls can be defined directly in the parameters.
      */
     private static final String password = "gjh%^&(&  {}77";
 
     /**
-     * AES加密字符串
+     * AES encrypted string
      *
-     * @param content 需要被加密的字符串
-     * @return 密文
+     * @param content String that needs to be encrypted
+     * @return ciphertext
      */
     public static String encrypt(String content) {
         try {
-            KeyGenerator kgen = KeyGenerator.getInstance("AES");//构造密钥生成器，指定为AES算法,不区分大小写
+            KeyGenerator kgen = KeyGenerator.getInstance("AES");//Construct a key generator, designated as the AES algorithm, not case sensitive.
 
-            kgen.init(128, new SecureRandom(password.getBytes()));//根据传入的字节数组,生成一个128位的随机源
+            kgen.init(128, new SecureRandom(password.getBytes()));//A random source of 128 bits is generated based on the incoming byte array.
 
-            SecretKey secretKey = kgen.generateKey();// 产生原始对称密钥
+            SecretKey secretKey = kgen.generateKey();// Generate primitive symmetric key
 
-            byte[] enCodeFormat = secretKey.getEncoded();// 获得原始对称密钥的字节数组
+            byte[] enCodeFormat = secretKey.getEncoded();// Gets the byte array of the original symmetric key.
 
             //Generate AES key based on byte array
             SecretKeySpec key = new SecretKeySpec(enCodeFormat, "AES");
 
-            Cipher cipher = Cipher.getInstance("AES");//根据指定算法AES生成密码器
+            Cipher cipher = Cipher.getInstance("AES");//Generate cipher based on the specified algorithm AES
 
-            byte[] byteContent = content.getBytes("UTF-8"); //将报文转成字节数组
+            byte[] byteContent = content.getBytes("UTF-8"); //Convert packets to byte arrays
             //(这里要设置为utf-8)不然内容中如果有中文和英文混合中文就会解密为乱码
 
             //Initialization cipher，

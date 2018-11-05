@@ -3,7 +3,7 @@
  *
  * @author: Liu Shilei
  * @version: V1.0
- * @Date: 2016年5月24日 下午7:43:01
+ * @Date: 7:43:01 PM May 24, 2016
  */
 package com.felix.cipherlibrary.des;
 
@@ -18,10 +18,10 @@ import javax.crypto.spec.IvParameterSpec;
 
 /**
  * <p>
- * 加密解密>
+ * 加密解密
  *
  * @author: Liu Shilei
- * @Date : 2016年5月24日 下午7:43:01
+ * 7:43:01 PM May 24, 2016
  */
 public class SecurityEncode {
 
@@ -31,14 +31,10 @@ public class SecurityEncode {
 
     /**
      * 加密
-     * <p> TODO</p>
+     * 9:48:29 am May 25, 2016
      *
-     * @author: Liu Shilei
-     * @param: @param data
-     * @param: @return
-     * @return: String
-     * @Date :          2016年5月25日 上午9:48:29
-     * @throws:
+     * @param data String
+     * @return String
      */
     public static String encodeStr(String data) {
         return encode(PUBLICE_KEY, data);
@@ -47,13 +43,10 @@ public class SecurityEncode {
     /**
      * 解密
      * <p> TODO</p>
+     * 9:49:14 am May 25, 2016
      *
-     * @author: Liu Shilei
-     * @param: @param data
-     * @param: @return
-     * @return: String
-     * @Date :          2016年5月25日 上午9:49:14
-     * @throws:
+     * @param data String
+     * @return String
      */
     public static String decodeStr(String data) {
         return decode(PUBLICE_KEY, data);
@@ -61,13 +54,11 @@ public class SecurityEncode {
 
 
     /**
-     * DES算法，加密
+     * DES algorithm, encryption
      *
      * @param data 待加密字符串
-     * @param key  加密私钥，长度不能够小于8位
+     * @param key  The length of encrypted private key can not be less than 8 bits.
      * @return 加密后的字节数组，一般结合Base64编码使用
-     * @throws InvalidAlgorithmParameterException
-     * @throws Exception
      */
     public static String encode(String key, String data) {
         if (data == null)
@@ -75,7 +66,7 @@ public class SecurityEncode {
         try {
             DESKeySpec dks = new DESKeySpec(key.getBytes());
             SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DES");
-            // key的长度不能够小于8位字节
+            //The length of key can not be less than 8 bit byte.
             Key secretKey = keyFactory.generateSecret(dks);
             Cipher cipher = Cipher.getInstance(ALGORITHM_DES);
             IvParameterSpec iv = new IvParameterSpec("12345678".getBytes());
@@ -90,12 +81,11 @@ public class SecurityEncode {
     }
 
     /**
-     * DES算法，解密
+     * DES algorithm, decryption
      *
      * @param data 待解密字符串
-     * @param key  解密私钥，长度不能够小于8位
+     * @param key  The length of the private key can not be less than 8 bits.
      * @return 解密后的字节数组
-     * @throws Exception 异常
      */
     public static String decode(String key, String data) {
         if (data == null)
@@ -103,7 +93,7 @@ public class SecurityEncode {
         try {
             DESKeySpec dks = new DESKeySpec(key.getBytes());
             SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DES");
-            // key的长度不能够小于8位字节
+            // The length of key can not be less than 8 bit byte.
             Key secretKey = keyFactory.generateSecret(dks);
             Cipher cipher = Cipher.getInstance(ALGORITHM_DES);
             IvParameterSpec iv = new IvParameterSpec("12345678".getBytes());
@@ -117,7 +107,7 @@ public class SecurityEncode {
     }
 
     /**
-     * 二行制转字符串
+     * Two line to string
      *
      * @param b
      * @return
@@ -148,14 +138,11 @@ public class SecurityEncode {
     /**
      * 使用指定key加密
      * <p> TODO</p>
+     * 11:18:05 am July 26, 2017
      *
-     * @author: Shangxl
-     * @param: @param key
-     * @param: @param data
-     * @param: @return
-     * @return: String
-     * @Date :          2017年7月26日 上午11:18:05
-     * @throws:
+     * @param data String
+     * @param key  String
+     * @return String
      */
     public static String encodeByKey(String key, String data) {
         if (data == null)
@@ -163,7 +150,7 @@ public class SecurityEncode {
         try {
             DESKeySpec dks = new DESKeySpec(key.getBytes());
             SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DES");
-            // key的长度不能够小于8位字节
+            // The length of key can not be less than 8 bit byte.
             Key secretKey = keyFactory.generateSecret(dks);
             Cipher cipher = Cipher.getInstance(ALGORITHM_DES);
             IvParameterSpec iv = new IvParameterSpec("12345678".getBytes());

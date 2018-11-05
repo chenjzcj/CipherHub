@@ -4,15 +4,15 @@ import com.tozny.crypto.android.AesCbcWithIntegrity;
 
 /**
  * Created by Felix.Zhong on 2018/10/7 15:53
- * AES对称加密封装最终解决方案 https://github.com/tozny/java-aes-crypto 工具类
+ * AES symmetric encryption encapsulation final solution https://github.com/tozny/java-aes-crypto tool class
  */
 public class AesCryptoUtils {
 
     /**
      * 加密
      *
-     * @param plaintext 需要加密的原文
-     * @return 加密后的字符串
+     * @param plaintext Encrypted original text
+     * @return Encrypted string
      */
     public static String encrypt(String plaintext) {
         String ciphertextString = "";
@@ -30,8 +30,9 @@ public class AesCryptoUtils {
     /**
      * 加密
      *
-     * @param plaintext 需要加密的原文
-     * @return 加密后的字符串
+     * @param plaintext Encrypted original text
+     * @param password  password
+     * @return Encrypted string
      */
     public static String encrypt(String plaintext, String password) {
         String ciphertextString = "";

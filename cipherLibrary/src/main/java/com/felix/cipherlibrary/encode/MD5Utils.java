@@ -12,7 +12,7 @@ import java.security.NoSuchAlgorithmException;
 
 /**
  * Created by Felix.Zhong on 2018/8/22 11:52
- * MD5加密工具类
+ * MD5 encryption tool class
  */
 public class MD5Utils {
 
@@ -24,20 +24,20 @@ public class MD5Utils {
     private static final String DEFAULT_ENCODING = "UTF-8";
 
     /**
-     * 使用MD5算法加密字符串
+     * Using MD5 algorithm to encrypt strings
      *
-     * @param info 需要加密的字符串
-     * @return 加密后的字符串
+     * @param info Encrypted strings
+     * @return Encrypted string
      */
     public static String getMD5CodeWithSaltPassword(String info) {
         return getMD5Code(info + Salt.SALT_PASSWORD.getSalt());
     }
 
     /**
-     * 使用MD5算法加密字符串
+     * Using MD5 algorithm to encrypt strings
      *
-     * @param info 需要加密的字符串
-     * @return 加密后的字符串
+     * @param info Encrypted strings
+     * @return Encrypted string
      */
     public static String getMD5Code(String info) {
         String md5Code = "";
@@ -63,7 +63,7 @@ public class MD5Utils {
     /**
      * 服务器端md5算法
      *
-     * @param content 需要加密的原文
+     * @param content Encrypted original text
      * @return 加密后的密文
      */
     public static String md5(String content) {
@@ -93,7 +93,7 @@ public class MD5Utils {
     /**
      * 使用MD5算法加密文件
      *
-     * @param file 需要加密的文件
+     * @param file Encrypted files
      * @return 加密后的文件
      */
     public static String md5ForFile(File file) {
@@ -101,20 +101,20 @@ public class MD5Utils {
         FileInputStream fis;
         DigestInputStream dis;
         try {
-            //创建MD5转换器和文件流
+            //Create MD5 converter and file stream
             MessageDigest messageDigest = MessageDigest.getInstance("MD5");
             fis = new FileInputStream(file);
             dis = new DigestInputStream(fis, messageDigest);
 
             byte[] buffer = new byte[bufferSize];
-            //DigestInputStream实际上在流处理文件时就在内部就进行了一定的处理
+            //DigestInputStream actually processes the files internally and processes them internally.
             while (dis.read(buffer) > 0) {
             }
 
-            //通过DigestInputStream对象得到一个最终的MessageDigest对象。
+            //A final MessageDigest object is obtained through the DigestInputStream object.
             messageDigest = dis.getMessageDigest();
 
-            // 通过messageDigest拿到结果，也是字节数组，包含16个元素
+            // The result obtained through messageDigest is also an array of bytes, which contains 16 elements.
             byte[] array = messageDigest.digest();
             // 同样，把字节数组转换成字符串
             StringBuilder hex = new StringBuilder(array.length * 2);

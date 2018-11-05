@@ -8,7 +8,7 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
 /**
- * 在java环境可以正常加解密，但是到了安卓环境，加解密有问题(每次加密的字符串不一样)
+ * In the Java environment, encryption and decryption can be normal, but in Android environment, encryption and decryption problems (each encrypted string is different)
  * <p>
  * {AES128 算法，加密模式为ECB，填充模式为 pkcs7（实际就是pkcs5）}
  */
@@ -16,15 +16,15 @@ public class AESUtils {
     /**
      * 加密
      *
-     * @param content 需要加密的内容
+     * @param content Content that needs encryption
      * @param key     加密密码
-     * @return 加密后字节数组
+     * @return Byte array after encryption
      */
     public static byte[] encrypt(String content, String key) {
         try {
             String type = "AES";
             KeyGenerator kgen = KeyGenerator.getInstance(type);
-            // 防止linux下 随机生成key
+            // Prevent random generation of key under Linux
             SecureRandom secureRandom = SecureRandom.getInstance("SHA1PRNG");
             secureRandom.setSeed(key.getBytes());
             //还可以这样初始化：kgen.init(128, new SecureRandom(password.getBytes()));
@@ -32,10 +32,10 @@ public class AESUtils {
             SecretKey secretKey = kgen.generateKey();
             byte[] enCodeFormat = secretKey.getEncoded();
             SecretKeySpec secretKeySpec = new SecretKeySpec(enCodeFormat, type);
-            // 创建密码器
+            // Create a cipher
             Cipher cipher = Cipher.getInstance(type);
             byte[] byteContent = content.getBytes("UTF-8");
-            // 初始化
+            // Initialization
             cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec);
             byte[] result = cipher.doFinal(byteContent);
             //System.out.println("result = " + Arrays.toString(result));
@@ -50,15 +50,15 @@ public class AESUtils {
     /**
      * 解密
      *
-     * @param content 待解密内容
+     * @param content Contents to be declassified
      * @param key     解密密钥
-     * @return 解密后字节数组
+     * @return Byte array after decryption
      */
     public static byte[] decrypt(byte[] content, String key) {
         try {
             String type = "AES";
             KeyGenerator kgen = KeyGenerator.getInstance(type);
-            // 防止linux下 随机生成key
+            // Prevent random generation of key under Linux
             SecureRandom secureRandom = SecureRandom.getInstance("SHA1PRNG");
             secureRandom.setSeed(key.getBytes());
             //还可以这样初始化：kgen.init(128, new SecureRandom(password.getBytes()));
@@ -66,9 +66,9 @@ public class AESUtils {
             SecretKey secretKey = kgen.generateKey();
             byte[] enCodeFormat = secretKey.getEncoded();
             SecretKeySpec secretKeySpec = new SecretKeySpec(enCodeFormat, type);
-            // 创建密码器
+            // Create a cipher
             Cipher cipher = Cipher.getInstance(type);
-            // 初始化
+            // Initialization
             cipher.init(Cipher.DECRYPT_MODE, secretKeySpec);
             byte[] result = cipher.doFinal(content);
             //System.out.println("result = " + Arrays.toString(result));
@@ -81,11 +81,11 @@ public class AESUtils {
     }
 
     /**
-     * 字符串加密,返回加密后的字符串
+     * String encryption, returns the encrypted string.
      *
-     * @param content 要加密的字符串
+     * @param content String to be encrypted
      * @param key     加密的AES Key
-     * @return 加密后的字符串
+     * @return Encrypted string
      */
     public static String encryptString(String content, String key) {
         byte[] encrypt = encrypt(content, key);
@@ -96,11 +96,11 @@ public class AESUtils {
     }
 
     /**
-     * 字符串解密，返回解密后的字符串
+     * String decryption, return the string after the decryption.
      *
-     * @param content 要解密的字符串
+     * @param content String to decrypt
      * @param key     解密的AES Key
-     * @return 解密后的字符串
+     * @return Decrypted string
      */
     public static String decryptString(String content, String key) {
         byte[] decryptFrom = parseHexStr2Byte(content);
@@ -112,10 +112,10 @@ public class AESUtils {
     }
 
     /**
-     * 将二进制转换成16进制,全部转成大写
+     * Convert binary to 16 hexadecimal, and turn it all into capital letters.
      *
-     * @param buf 需要转成16进制字符串的字节数组
-     * @return 转换成16进制后的字符串
+     * @param buf An array of bytes that need to be converted into 16 binary strings.
+     * @return Converted to 16 hexadecimal strings
      */
     public static String parseByte2HexStr(byte[] buf) {
         StringBuilder sb = new StringBuilder();
@@ -130,9 +130,9 @@ public class AESUtils {
     }
 
     /**
-     * 将16进制转换为二进制
+     * Converting 16 binary to binary
      *
-     * @param hexStr 16进制字符串
+     * @param hexStr 16 hexadecimal string
      * @return 转换后的字节数组
      */
     public static byte[] parseHexStr2Byte(String hexStr) {

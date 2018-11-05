@@ -41,6 +41,10 @@ public class AESUtils3 {
 
     /**
      * 加密字节数据
+     *
+     * @param content  content
+     * @param password password
+     * @return byte[]
      */
     public static byte[] encrypt(byte[] content, String password) {
         try {
@@ -57,6 +61,10 @@ public class AESUtils3 {
 
     /**
      * Encryption (result is 16 binary string)
+     *
+     * @param content  content
+     * @param password password
+     * @return String
      */
     public static String encrypt(String content, String password) {
         byte[] data = null;
@@ -87,6 +95,10 @@ public class AESUtils3 {
 
     /**
      * 解密16进制的字符串为字符串
+     *
+     * @param content  content
+     * @param password password
+     * @return String
      */
     public static String decrypt(String content, String password) {
         byte[] data = null;
