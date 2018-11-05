@@ -57,14 +57,16 @@ public class AESUtils2 {
 
             byte[] enCodeFormat = secretKey.getEncoded();// 获得原始对称密钥的字节数组
 
-            SecretKeySpec key = new SecretKeySpec(enCodeFormat, "AES");//根据字节数组生成AES密钥
+            //Generate AES key based on byte array
+            SecretKeySpec key = new SecretKeySpec(enCodeFormat, "AES");
 
             Cipher cipher = Cipher.getInstance("AES");//根据指定算法AES生成密码器
 
             byte[] byteContent = content.getBytes("UTF-8"); //将报文转成字节数组
             //(这里要设置为utf-8)不然内容中如果有中文和英文混合中文就会解密为乱码
 
-            cipher.init(Cipher.ENCRYPT_MODE, key);//初始化密码器，
+            //Initialization cipher，
+            cipher.init(Cipher.ENCRYPT_MODE, key);
 
             byte[] ciphertext = cipher.doFinal(byteContent);// 加密
 
@@ -87,16 +89,18 @@ public class AESUtils2 {
     }
 
     /**
-     * 解密AES加密过的字符串
+     * Decrypt AES encrypted string
      *
-     * @param content AES加密过过的内容
+     * @param content AES encrypted content
      * @return 明文
      */
     public static String decrypt(String content) {
         try {
-            KeyGenerator kgen = KeyGenerator.getInstance("AES");//构造密钥生成器，指定为AES算法,不区分大小写
+            //Construct a key generator, designated as the AES algorithm, not case sensitive.
+            KeyGenerator kgen = KeyGenerator.getInstance("AES");
 
-            kgen.init(128, new SecureRandom(password.getBytes()));//根据传入的字节数组,生成一个128位的随机源
+            //A random source of 128 bits is generated based on the incoming byte array.
+            kgen.init(128, new SecureRandom(password.getBytes()));
 
             SecretKey secretKey = kgen.generateKey();//产生原始对称密钥
 

@@ -56,7 +56,7 @@ public class AESUtils3 {
     }
 
     /**
-     * 加密(结果为16进制字符串)
+     * Encryption (result is 16 binary string)
      */
     public static String encrypt(String content, String password) {
         byte[] data = null;
