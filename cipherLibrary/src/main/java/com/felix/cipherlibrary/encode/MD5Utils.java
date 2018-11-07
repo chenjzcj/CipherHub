@@ -1,6 +1,5 @@
 package com.felix.cipherlibrary.encode;
 
-
 import com.felix.cipherlibrary.Salt;
 
 import java.io.File;
