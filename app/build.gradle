@@ -27,5 +27,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     //常用工具套装 https://github.com/chenjzcj/AndroidUtilCode
     implementation 'com.blankj:utilcode:1.17.3'
-    implementation project(':cipherLibrary')
+    //implementation project(':cipherLibrary')
+    implementation 'com.felix:cipherLibrary:1.0.0'
 }
