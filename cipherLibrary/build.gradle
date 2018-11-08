@@ -11,8 +11,8 @@ android {
     defaultConfig {
         minSdkVersion 19
         targetSdkVersion 28
-        versionCode 1
-        versionName "1.0.1"
+        versionCode 2
+        versionName "1.0.2"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -52,9 +52,9 @@ publish {
     userOrg = "felixzhong"//bintray.com用户名
     groupId = "com.felix"//jecenter上的路径
     artifactId = "cipherLibrary"//项目名称
-    publishVersion = "1.0.1"//版本号
+    publishVersion = "1.0.2"//版本号
     desc = "加密集合"//描述，不重要
     website = "https://github.com/chenjzcj/CipherHub"//网站，不重要，尽量模拟github上面的，当然有最好了
     repoName = "felixRepo"//库的名称
-    //compile 'com.felix:cipherLibrary:1.0.1' 最终结果(add to jcenter后需要至少2小时才可以使用)
+    //compile 'com.felix:cipherLibrary:1.0.2' 最终结果(add to jcenter后需要至少2小时才可以使用)
 }

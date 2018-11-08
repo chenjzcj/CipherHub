@@ -27,8 +27,8 @@ public class MD5Utils {
      * @param salt salt
      * @return Encrypted string
      */
-    public static String getMD5CodeWithSaltPassword(String info, String salt) {
-        return getMD5Code(info);
+    public static String getMD5Code(String info, String salt) {
+        return getMD5Code(info+salt);
     }
 
     /**
