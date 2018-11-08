@@ -16,6 +16,14 @@ buildscript {
 }
 
 allprojects {
+    //解决上传到bintray时的编码问题，如果不加上这一段代码，会出现：错误: 编码GBK的不可映射字符 的问题
+    tasks.withType(Javadoc) {
+        options{
+            encoding "GBK"
+            charSet 'GBK'
+            links "http://docs.oracle.com/javase/7/docs/api"
+        }
+    }
     repositories {
         google()
         jcenter()

@@ -1,7 +1,5 @@
 package com.felix.cipherlibrary.encode;
 
-import com.felix.cipherlibrary.Salt;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -26,10 +24,11 @@ public class MD5Utils {
      * Using MD5 algorithm to encrypt strings
      *
      * @param info Encrypted strings
+     * @param salt salt
      * @return Encrypted string
      */
-    public static String getMD5CodeWithSaltPassword(String info) {
-        return getMD5Code(info + Salt.SALT_PASSWORD.getSalt());
+    public static String getMD5CodeWithSaltPassword(String info, String salt) {
+        return getMD5Code(info);
     }
 
     /**
