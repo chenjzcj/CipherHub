@@ -7,7 +7,6 @@
  */
 package com.felix.cipherlibrary.des;
 
-import java.security.InvalidAlgorithmParameterException;
 import java.security.Key;
 import java.security.spec.AlgorithmParameterSpec;
 
@@ -88,8 +87,9 @@ public class SecurityEncode {
      * @return 解密后的字节数组
      */
     public static String decode(String key, String data) {
-        if (data == null)
+        if (data == null) {
             return null;
+        }
         try {
             DESKeySpec dks = new DESKeySpec(key.getBytes());
             SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DES");
